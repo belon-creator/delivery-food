@@ -23,6 +23,12 @@ let login = localStorage.getItem('gloDelivery');
 
 function toogleModalAuth() {
   modalAuth.classList.toggle('is-open');
+  loginInput.style.borderColor = '';
+  if (modalAuth.classList.contains('is-open')) {
+    disableScroll();
+  } else {
+    enableScroll();
+  }
 }
 
 function authorized() {
@@ -50,19 +56,31 @@ function notAuthorized() {
 
   function logIn(event) {
     event.preventDefault();
-    login = loginInput.value;
-    localStorage.setItem('gloDelivery', login);
-    toogleModalAuth();
-    buttonAuth.removeEventListener('click', toogleModalAuth);
-    closeAuth.removeEventListener('click', toogleModalAuth);
-    logInForm.removeEventListener('submit', logIn);
-    logInForm.reset();
-    checkAuth();
+
+    if (loginInput.value.trim()) {
+      login = loginInput.value;
+      localStorage.setItem('gloDelivery', login);
+      toogleModalAuth();
+
+      buttonAuth.removeEventListener('click', toogleModalAuth);
+      closeAuth.removeEventListener('click', toogleModalAuth);
+      logInForm.removeEventListener('submit', logIn);
+      logInForm.reset();
+      checkAuth();
+    } else {
+      loginInput.style.borderColor = '#ff0000';
+      loginInput.value = '';
+    }
   }
 
   buttonAuth.addEventListener('click', toogleModalAuth);
   closeAuth.addEventListener('click', toogleModalAuth);
   logInForm.addEventListener('submit', logIn);
+  modalAuth.addEventListener('click', function (event) {
+    if (event.target.classList.contains('is-open')) {
+      toogleModalAuth();
+    }
+  });
 }
 
 function checkAuth() {
