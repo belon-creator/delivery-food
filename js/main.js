@@ -4,9 +4,6 @@ const cartButton = document.querySelector('#cart-button');
 const modal = document.querySelector('.modal');
 const close = document.querySelector('.close');
 
-cartButton.addEventListener('click', toggleModal);
-close.addEventListener('click', toggleModal);
-
 function toggleModal() {
   modal.classList.toggle('is-open');
 }
@@ -28,6 +25,15 @@ const logo = document.querySelector('.logo');
 const cardsMenu = document.querySelector('.cards-menu');
 
 let login = localStorage.getItem('gloDelivery');
+
+const getData = async function (url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`error ${url}, mistake ${response.status}`);
+  }
+  return await response.json();
+};
 
 function toogleModalAuth() {
   modalAuth.classList.toggle('is-open');
@@ -101,24 +107,34 @@ function checkAuth() {
 
 checkAuth();
 
-function createCardRestaurant(params) {
+function createCardRestaurant(restaurant) {
+  const {
+    image,
+    kitchen,
+    name,
+    price,
+    products,
+    stars,
+    time_of_delivery,
+  } = restaurant;
+
   const card = `
-  <a class="card card-restaurant">
+  <a class="card card-restaurant" data-products='${products}'>
   <img
-    src="img/tanuki/preview.jpg"
+    src=${image}
     alt="image"
     class="card-image"
   />
   <div class="card-text">
     <div class="card-heading">
-      <h3 class="card-title">Тануки</h3>
-      <span class="card-tag tag">60 мин</span>
+      <h3 class="card-title">${name}</h3>
+      <span class="card-tag tag">${time_of_delivery}</span>
     </div>
    
     <div class="card-info">
-      <div class="rating">4.5</div>
-      <div class="price">От 1 200 грн</div>
-      <div class="category">Суши, роллы</div>
+      <div class="rating">${stars}</div>
+      <div class="price">От ${price} uah</div>
+      <div class="category">${kitchen}</div>
     </div>    
   </div>  
 </a>
@@ -128,26 +144,25 @@ function createCardRestaurant(params) {
   cardsRestaurants.insertAdjacentHTML('beforeend', card);
 }
 
-createCardRestaurant();
+function createCardGood(goods) {
+  const { id, name, description, price, image } = goods;
 
-function createCardGood() {
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
   <img
-  src="img/pizza-plus/pizza-classic.jpg"
+  src="${image}"
   alt="image"
   class="card-image"
 />
 <div class="card-text">
   <div class="card-heading">
-    <h3 class="card-title card-title-reg">Пицца Классика</h3>
+    <h3 class="card-title card-title-reg">${name}</h3>
   </div>
   <!-- /.card-heading -->
   <div class="card-info">
     <div class="ingredients">
-      Соус томатный, сыр «Моцарелла», сыр «Пармезан», ветчина,
-      салями, грибы.
+    ${description}
     </div>
   </div>
   <!-- /.card-info -->
@@ -156,7 +171,7 @@ function createCardGood() {
       <span class="button-card-text">В корзину</span>
       <span class="button-cart-svg"></span>
     </button>
-    <strong class="card-price-bold">510 грн</strong>
+    <strong class="card-price-bold">${price} грн</strong>
   </div>
   `;
   cardsMenu.insertAdjacentElement('beforeend', card);
@@ -170,17 +185,29 @@ function openGoods(event) {
     cardsMenu.textContent = '';
     containerPromo.classList.add('hide');
     restaurants.classList.add('hide');
-    menu.classList.remove('hide');
 
-    createCardGood();
-    createCardGood();
-    createCardGood();
+    getData(`./db/${restaurant.dataset.products}`).then(function (data) {
+      data.forEach(createCardGood);
+    });
+    menu.classList.remove('hide');
   }
 }
 
-cardsRestaurants.addEventListener('click', openGoods);
 logo.addEventListener('click', function () {
   containerPromo.classList.remove('hide');
   restaurants.classList.remove('hide');
   menu.classList.add('hide');
 });
+
+function init() {
+  getData('./db/partners.json').then(function (data) {
+    data.forEach(createCardRestaurant);
+
+    cartButton.addEventListener('click', toggleModal);
+    close.addEventListener('click', toggleModal);
+
+    cardsRestaurants.addEventListener('click', openGoods);
+  });
+}
+
+init();
