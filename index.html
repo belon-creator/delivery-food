@@ -8,9 +8,10 @@
       href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+    <!-- <script src="./js/slider.js"></script> -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
@@ -47,33 +48,53 @@
 
     <main class="main">
       <div class="container">
-        <section class="container-promo">
-          <section class="promo pizza">
-            <h1 class="promo-title">Онлайн-сервис <br />доставки еды на дом</h1>
-            <p class="promo-text">
-              Блюда из любимого ресторана привезет курьер в перчатках, маске и с
-              антисептиком
-            </p>
+        <div class="swiper-container">
+          <section class="container-promo swiper-wrapper">
+            <!-- slider -->
+            <section class="promo pizza swiper-slide">
+              <h2 class="promo-title">
+                Онлайн-сервис <br />доставки еды на дом
+              </h2>
+              <p class="promo-text">
+                Блюда из любимого ресторана привезет курьер в перчатках, маске и
+                с антисептиком
+              </p>
+            </section>
+            <section class="promo kebab swiper-slide">
+              <h2 class="promo-title">
+                Шашлыки на майские <br />
+                со скидкой 35%
+              </h2>
+              <p class="promo-text">
+                Закажите шашлыки в любом ресторане до 10 мая и получите скидку
+                по промокоду OMAGAD
+              </p>
+            </section>
+            <section class="promo vegetables swiper-slide">
+              <h2 class="promo-title">
+                Скидка 20% на всю еду <br />
+                по промокоду LOVE.JS
+              </h2>
+              <p class="promo-text">
+                Блюдо из ресторана привезут вместе с двумя подарочными книгами
+                по фронтенду
+              </p>
+            </section>
+            <section class="promo sushi swiper-slide">
+              <h2 class="promo-title">
+                Сеты со скидкой до 30% <br />
+                в ресторанах
+              </h2>
+              <p class="promo-text">
+                Скидки на сеты до 30 мая по промокоду DADADA
+              </p>
+            </section>
+
+            <!-- slider end -->
           </section>
-          <!-- <section class="promo kebab">
-					<h1 class="promo-title">Шашлыки на майские <br> со скидкой 35%</h1>
-					<p class="promo-text">
-						Закажите шашлыки в любом ресторане до 10 мая и получите скидку по промокоду OMAGAD
-					</p>
-				</section>
-				<section class="promo vegetables">
-					<h1 class="promo-title">Скидка 20% на всю еду <br> по промокоду LOVE.JS</h1>
-					<p class="promo-text">
-						Блюдо из ресторана привезут вместе с двумя подарочными книгами по фронтенду
-					</p>
-				</section>
-				<section class="promo sushi">
-					<h1 class="promo-title">Сеты со скидкой до 30% <br> в ресторанах</h1>
-					<p class="promo-text">
-						Скидки на сеты до 30 мая по промокоду DADADA
-					</p>
-				</section> -->
-        </section>
+
+          <div class="swiper-pagination"></div>
+        </div>
 
         <section class="restaurants">
           <div class="section-heading">
@@ -94,10 +115,9 @@
             <h2 class="section-title restaurant-title">Пицца Плюс</h2>
             <div class="card-info">
               <div class="rating">4.5</div>
-              <div class="price">От 900 грн</div>
+              <div class="price">От 900 ₽</div>
               <div class="category">Пицца</div>
             </div>
-
             <!-- /.card-info -->
           </div>
           <div class="cards cards-menu"></div>
@@ -144,7 +164,7 @@
         <div class="modal-body">
           <div class="food-row">
             <span class="food-name">Ролл угорь стандарт</span>
-            <strong class="food-price">250 грн</strong>
+            <strong class="food-price">250 ₽</strong>
             <div class="food-counter">
               <button class="counter-button">-</button>
               <span class="counter">1</span>
@@ -154,7 +174,7 @@
           <!-- /.foods-row -->
           <div class="food-row">
             <span class="food-name">Ролл угорь стандарт</span>
-            <strong class="food-price">250 грн</strong>
+            <strong class="food-price">250 ₽</strong>
             <div class="food-counter">
               <button class="counter-button">-</button>
               <span class="counter">1</span>
@@ -164,7 +184,7 @@
           <!-- /.foods-row -->
           <div class="food-row">
             <span class="food-name">Ролл угорь стандарт</span>
-            <strong class="food-price">250 грн</strong>
+            <strong class="food-price">250 ₽</strong>
             <div class="food-counter">
               <button class="counter-button">-</button>
               <span class="counter">1</span>
@@ -174,7 +194,7 @@
           <!-- /.foods-row -->
           <div class="food-row">
             <span class="food-name">Ролл угорь стандарт</span>
-            <strong class="food-price">250 грн</strong>
+            <strong class="food-price">250 ₽</strong>
             <div class="food-counter">
               <button class="counter-button">-</button>
               <span class="counter">1</span>
@@ -185,7 +205,7 @@
         </div>
         <!-- /.modal-body -->
         <div class="modal-footer">
-          <span class="modal-pricetag">1250 грн</span>
+          <span class="modal-pricetag">1250 ₽</span>
           <div class="footer-buttons">
             <button class="button button-primary">Оформить заказ</button>
             <button class="button clear-cart">Отмена</button>
@@ -224,8 +244,8 @@
       </div>
       <!-- /.modal-dialog -->
     </div>
-    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+   
     <script src="./js/disabledScroll.js"></script>
-    <script src="js/main.js"></script>
+    <script src="./js/main.js" type="module"></script>
   </body>
 </html>

@@ -38,9 +38,9 @@
   {
     "name": "Гуси Лебеди",
     "time_of_delivery": 75,
-    "stars": 4.7,
+    "stars": 4.9,
     "price": 1000,
-    "kitchen": "Русская кухня",
+    "kitchen": "Украинская кухня",
     "image": "img/gusi-lebedi/preview.jpg",
     "products": "gusi-lebedi.json"
   },
